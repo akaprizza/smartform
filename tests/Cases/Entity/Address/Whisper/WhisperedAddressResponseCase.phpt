@@ -27,6 +27,7 @@ final class WhisperedAddressResponseCase extends TestCase
 		Assert::same(24, $whisperedAddressResponse->getId());
 		Assert::count(1, $whisperedAddressResponse->getResult());
 		Assert::type(WhisperedAddress::class, $whisperedAddressResponse->getResult()[0]);
+		Assert::true($whisperedAddressResponse->getResult()[0]->isWholeAddress());
 	}
 
 }

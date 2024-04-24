@@ -2,6 +2,8 @@
 
 namespace Awaitcz\SmartForm\Entity\Address\Whisper;
 
+use function array_key_exists;
+
 final class WhisperedAddress
 {
 
@@ -13,13 +15,14 @@ final class WhisperedAddress
 		private readonly string|null $number,
 		private readonly string|null $streetWithNumber,
 		private readonly string|null $street,
+		private readonly string|null $cityExtended,
+		private readonly string|null $cityAndDistrict,
 		private readonly string|null $city,
-		private readonly string|null $municipalityAndDistrict,
-		private readonly string|null $municipality,
 		private readonly string|null $district,
 		private readonly string|null $region,
 		private readonly string|null $postCode,
 		private readonly string|null $wholeAddress,
+		private readonly string|null $post,
 		private readonly array $flags = [],
 	)
 	{
@@ -35,13 +38,14 @@ final class WhisperedAddress
 			$data['values']['NUMBER'] ?? null,
 			$data['values']['STREET_AND_NUMBER'] ?? null,
 			$data['values']['STREET'] ?? null,
+			$data['values']['CITY_EXTENDED'] ?? null,
+			$data['values']['CITY_AND_DISTRICT'] ?? null,
 			$data['values']['CITY'] ?? null,
-			$data['values']['MUNICIPALITY_AND_DISTRICT'] ?? null,
-			$data['values']['MUNICIPALITY'] ?? null,
 			$data['values']['DISTRICT'] ?? null,
 			$data['values']['REGION'] ?? null,
 			$data['values']['ZIP'] ?? null,
 			$data['values']['WHOLE_ADDRESS'] ?? null,
+			$data['values']['POST'] ?? null,
 			$data['flags'] ?? [],
 		);
 	}
@@ -66,19 +70,19 @@ final class WhisperedAddress
 		return $this->street;
 	}
 
+	public function getCityExtended(): string|null
+	{
+		return $this->cityExtended;
+	}
+
+	public function getCityAndDistrict(): string|null
+	{
+		return $this->cityAndDistrict;
+	}
+
 	public function getCity(): string|null
 	{
 		return $this->city;
-	}
-
-	public function getMunicipalityAndDistrict(): string|null
-	{
-		return $this->municipalityAndDistrict;
-	}
-
-	public function getMunicipality(): string|null
-	{
-		return $this->municipality;
 	}
 
 	public function getDistrict(): string|null
@@ -101,12 +105,22 @@ final class WhisperedAddress
 		return $this->wholeAddress;
 	}
 
+	public function getPost(): string|null
+	{
+		return $this->post;
+	}
+
 	/**
 	 * @return array<string>
 	 */
 	public function getFlags(): array
 	{
 		return $this->flags;
+	}
+
+	public function isWholeAddress(): bool
+	{
+		return array_key_exists('WHOLE_ADDRESS', $this->flags) && $this->flags['WHOLE_ADDRESS'] === 'true';
 	}
 
 }

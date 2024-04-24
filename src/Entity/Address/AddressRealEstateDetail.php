@@ -24,14 +24,14 @@ final class AddressRealEstateDetail
 	public static function fromArray(array $data): self
 	{
 		return new self(
-			$data['BUILDING_PARCEL_NUMBER_1'] ?? null,
-			$data['BUILDING_PARCEL_NUMBER_2'] ?? null,
-			$data['CADASTRAL_UNIT_NAME'] ?? null,
-			$data['CADASTRAL_UNIT_CODE'] ?? null,
-			$data['BUILDING_WITH_LIFT'] !== null ? $data['BUILDING_WITH_LIFT'] === 'true' : null,
-			$data['NUMBER_OF_STOREYS'] ?? null,
-			$data['NUMBER_OF_FLATS'] ?? null,
-			$data['FLOOR_AREA'] ?? null,
+			$data['parcelNumber1'] ?? null,
+			$data['parcelNumber2'] ?? null,
+			$data['cadastralUnitName'] ?? null,
+			$data['cadastralUnitCode'] ?? null,
+			$data['liftPresence'] !== null ? $data['liftPresence'] === 'true' : null,
+			$data['numberOfStoreys'] ?? null,
+			$data['numberOfFlats'] ?? null,
+			$data['floorArea'] ?? null,
 		);
 	}
 

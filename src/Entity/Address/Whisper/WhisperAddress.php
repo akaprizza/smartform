@@ -5,6 +5,7 @@ namespace Awaitcz\SmartForm\Entity\Address\Whisper;
 use Awaitcz\SmartForm\Entity\Address\Whisper\Query\WhisperAddressQuery;
 use Awaitcz\SmartForm\Entity\Address\Whisper\SuggestContext\WhisperSuggestContext;
 use Awaitcz\SmartForm\Entity\Country;
+use function array_filter;
 
 final class WhisperAddress
 {
@@ -49,13 +50,14 @@ final class WhisperAddress
 	 */
 	public function toArray(): array
 	{
-		return [
-			'id' => $this->id ?? 0,
+		return array_filter([
+			'id' => $this->id,
 			'fieldType' => $this->values->getFieldType(),
 			'values' => $this->values->toArray(),
 			'country' => $this->country?->value ?? Country::CzechRepublic,
 			'limit' => $this->limit > 21 || $this->limit < 1 ? 21 : $this->limit,
-		] + ($this->suggestContext ? ['suggestContext' => $this->suggestContext->toArray()] : []);
+			'suggestContext' => $this->suggestContext?->toArray(),
+		], static fn (mixed $value): bool => $value !== null);
 	}
 
 }

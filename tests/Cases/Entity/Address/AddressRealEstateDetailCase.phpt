@@ -14,14 +14,14 @@ final class AddressRealEstateDetailCase extends TestCase
 	public function testUsing(): void
 	{
 		$realEstateDetail = AddressRealEstateDetail::fromArray([
-			'BUILDING_PARCEL_NUMBER_1' => '680',
-			'BUILDING_PARCEL_NUMBER_2' => '4',
-			'CADASTRAL_UNIT_NAME' => 'Malá Strana',
-			'CADASTRAL_UNIT_CODE' => '727091',
-			'BUILDING_WITH_LIFT' => 'true',
-			'NUMBER_OF_STOREYS' => '1',
-			'NUMBER_OF_FLATS' => '0',
-			'FLOOR_AREA' => '7486',
+			'parcelNumber1' => '680',
+			'parcelNumber2' => '4',
+			'cadastralUnitName' => 'Malá Strana',
+			'cadastralUnitCode' => '727091',
+			'liftPresence' => 'true',
+			'numberOfStoreys' => '1',
+			'numberOfFlats' => '0',
+			'floorArea' => '7486',
 		]);
 
 		Assert::type(AddressRealEstateDetail::class, $realEstateDetail);

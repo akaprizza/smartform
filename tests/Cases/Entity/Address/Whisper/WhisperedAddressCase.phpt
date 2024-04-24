@@ -26,13 +26,14 @@ final class WhisperedAddressCase extends TestCase
 		Assert::same('1266/3', $whisperedAddress->getNumber());
 		Assert::same('Foglarova 1266/3', $whisperedAddress->getStreetWithNumber());
 		Assert::same('Foglarova', $whisperedAddress->getStreet());
-		Assert::same('Plzeň 23', $whisperedAddress->getCity());
-		Assert::same('Foo', $whisperedAddress->getMunicipalityAndDistrict());
-		Assert::same('Plzeň', $whisperedAddress->getMunicipality());
+		Assert::same('Plzeň', $whisperedAddress->getCityExtended());
+		Assert::same(null, $whisperedAddress->getCityAndDistrict());
+		Assert::same('Plzeň', $whisperedAddress->getCity());
 		Assert::same('Plzeň-město', $whisperedAddress->getDistrict());
 		Assert::same('Plzeňský kraj', $whisperedAddress->getRegion());
 		Assert::same('32300', $whisperedAddress->getPostCode());
-		Assert::same('Foglarova 1266/3, 32300 Plzeň 23', $whisperedAddress->getWholeAddress());
+		Assert::same('Foglarova 1266/3, 32300 Plzeň', $whisperedAddress->getWholeAddress());
+		Assert::same('Plzeň 23', $whisperedAddress->getPost());
 		Assert::hasKey('WHOLE_ADDRESS', $whisperedAddress->getFlags());
 		Assert::same('true', $whisperedAddress->getFlags()['WHOLE_ADDRESS']);
 	}

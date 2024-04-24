@@ -25,7 +25,7 @@ final class ValidatedAddressResponseCase extends TestCase
 
 		Assert::same(ResultCode::Ok, $validatedAddressResponse->getResultCode());
 		Assert::null($validatedAddressResponse->getErrorMessage());
-		Assert::same(null, $validatedAddressResponse->getId());
+		Assert::same(16, $validatedAddressResponse->getId());
 		Assert::count(1, $validatedAddressResponse->getResult());
 		Assert::same(ResultType::Hit, $validatedAddressResponse->getResultType());
 		Assert::same(null, $validatedAddressResponse->getHint());

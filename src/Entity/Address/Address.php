@@ -10,13 +10,13 @@ final class Address
 		private readonly string|null $code,
 		private readonly string|null $streetName,
 		private readonly string|null $streetCode,
-		private readonly string|null $municipalityName,
-		private readonly string|null $municipalityCode,
+		private readonly string|null $cityName,
+		private readonly string|null $cityCode,
 		private readonly string|null $postName,
 		private readonly string|null $postCode,
-		private readonly string|null $municipalityAndOptionalDistrict,
-		private readonly string|null $municipalityPartName,
-		private readonly string|null $municipalityPartCode,
+		private readonly string|null $cityAndOptionalDistrict,
+		private readonly string|null $partName,
+		private readonly string|null $partCode,
 		private readonly string|null $cityAreaFirstName,
 		private readonly string|null $cityAreaFirstCode,
 		private readonly string|null $cityAreaSecondName,
@@ -31,14 +31,14 @@ final class Address
 		private readonly string|null $regionCode,
 		private readonly string|null $countryName,
 		private readonly string|null $countryCode,
-		private readonly string|null $landRegistryHouseNumber,
-		private readonly string|null $particularStreetHouseNumber,
-		private readonly string|null $particularStreetHouseNumberCharacter,
-		private readonly string|null $evidenceHouseNumber,
-		private readonly string|null $numberWhole,
-		private readonly string|null $firstLineAddress,
-		private readonly string|null $firstLineAddressWithoutNumber,
-		private readonly string|null $secondLineAddress,
+		private readonly string|null $conscriptionNumber,
+		private readonly string|null $streetNumber,
+		private readonly string|null $streetNumberCharacter,
+		private readonly string|null $provisionalNumber,
+		private readonly string|null $wholeNumber,
+		private readonly string|null $firstLineFormattedAddress,
+		private readonly string|null $firstLineFormattedAddressWithoutNumber,
+		private readonly string|null $secondLineFormattedAddress,
 		private readonly string|null $wholeName,
 		private readonly AddressCoordinates $coordinates,
 		private readonly AddressRealEstateDetail|null $realEstateDetail,
@@ -56,13 +56,13 @@ final class Address
 			$data['values']['CODE'] ?? null,
 			$data['values']['STREET_NAME'] ?? null,
 			$data['values']['STREET_CODE'] ?? null,
-			$data['values']['MUNICIPALITY_NAME'] ?? null,
-			$data['values']['MUNICIPALITY_CODE'] ?? null,
+			$data['values']['CITY_NAME'] ?? null,
+			$data['values']['CITY_CODE'] ?? null,
 			$data['values']['POST_NAME'] ?? null,
 			$data['values']['ZIP'] ?? null,
-			$data['values']['MUNICIPALITY_AND_OPTIONAL_DISTRICT'] ?? null,
-			$data['values']['MUNICIPALITY_PART_NAME'] ?? null,
-			$data['values']['MUNICIPALITY_PART_CODE'] ?? null,
+			$data['values']['CITY_AND_OPTIONAL_DISTRICT'] ?? null,
+			$data['values']['PART_NAME'] ?? null,
+			$data['values']['PART_CODE'] ?? null,
 			$data['values']['CITY_AREA_1_NAME'] ?? null,
 			$data['values']['CITY_AREA_1_CODE'] ?? null,
 			$data['values']['CITY_AREA_2_NAME'] ?? null,
@@ -77,15 +77,15 @@ final class Address
 			$data['values']['REGION_CODE'] ?? null,
 			$data['values']['COUNTRY_NAME'] ?? null,
 			$data['values']['COUNTRY_CODE'] ?? null,
-			$data['values']['NUMBER_POPISNE'] ?? null,
-			$data['values']['NUMBER_ORIENT'] ?? null,
-			$data['values']['CHAR_ORIENT'] ?? null,
-			$data['values']['NUMBER_EVIDENCNI'] ?? null,
-			$data['values']['NUMBER_WHOLE'] ?? null,
-			$data['values']['FIRST_LINE'] ?? null,
-			$data['values']['FIRST_LINE_NO_NUMBER'] ?? null,
-			$data['values']['SECOND_LINE'] ?? null,
-			$data['values']['WHOLE_NAME'] ?? null,
+			$data['values']['CONSCRIPTION_NUMBER'] ?? null,
+			$data['values']['STREET_NUMBER'] ?? null,
+			$data['values']['STREET_NUMBER_CHAR'] ?? null,
+			$data['values']['PROVISIONAL_NUMBER'] ?? null,
+			$data['values']['WHOLE_NUMBER'] ?? null,
+			$data['values']['FORMATTED_ADDRESS_FIRST_LINE'] ?? null,
+			$data['values']['FORMATTED_ADDRESS_FIRST_LINE_NO_NUMBER'] ?? null,
+			$data['values']['FORMATTED_ADDRESS_SECOND_LINE'] ?? null,
+			$data['values']['FORMATTED_ADDRESS_WHOLE'] ?? null,
 			AddressCoordinates::fromArray($data['coordinates']),
 			isset($data['realEstateDetails'])
 				? AddressRealEstateDetail::fromArray($data['realEstateDetails'])
@@ -113,14 +113,14 @@ final class Address
 		return $this->streetCode;
 	}
 
-	public function getMunicipalityName(): string|null
+	public function getCityName(): string|null
 	{
-		return $this->municipalityName;
+		return $this->cityName;
 	}
 
-	public function getMunicipalityCode(): string|null
+	public function getCityCode(): string|null
 	{
-		return $this->municipalityCode;
+		return $this->cityCode;
 	}
 
 	public function getPostName(): string|null
@@ -133,19 +133,19 @@ final class Address
 		return $this->postCode;
 	}
 
-	public function getMunicipalityAndOptionalDistrict(): string|null
+	public function getCityAndOptionalDistrict(): string|null
 	{
-		return $this->municipalityAndOptionalDistrict;
+		return $this->cityAndOptionalDistrict;
 	}
 
-	public function getMunicipalityPartName(): string|null
+	public function getPartName(): string|null
 	{
-		return $this->municipalityPartName;
+		return $this->partName;
 	}
 
-	public function getMunicipalityPartCode(): string|null
+	public function getPartCode(): string|null
 	{
-		return $this->municipalityPartCode;
+		return $this->partCode;
 	}
 
 	public function getCityAreaFirstName(): string|null
@@ -218,44 +218,44 @@ final class Address
 		return $this->countryCode;
 	}
 
-	public function getLandRegistryHouseNumber(): string|null
+	public function getConscriptionNumber(): string|null
 	{
-		return $this->landRegistryHouseNumber;
+		return $this->conscriptionNumber;
 	}
 
-	public function getParticularStreetHouseNumber(): string|null
+	public function getStreetNumber(): string|null
 	{
-		return $this->particularStreetHouseNumber;
+		return $this->streetNumber;
 	}
 
-	public function getParticularStreetHouseNumberCharacter(): string|null
+	public function getStreetNumberCharacter(): string|null
 	{
-		return $this->particularStreetHouseNumberCharacter;
+		return $this->streetNumberCharacter;
 	}
 
-	public function getEvidenceHouseNumber(): string|null
+	public function getProvisionalNumber(): string|null
 	{
-		return $this->evidenceHouseNumber;
+		return $this->provisionalNumber;
 	}
 
-	public function getNumberWhole(): string|null
+	public function getWholeNumber(): string|null
 	{
-		return $this->numberWhole;
+		return $this->wholeNumber;
 	}
 
-	public function getFirstLineAddress(): string|null
+	public function getFirstLineFormattedAddress(): string|null
 	{
-		return $this->firstLineAddress;
+		return $this->firstLineFormattedAddress;
 	}
 
-	public function getFirstLineAddressWithoutNumber(): string|null
+	public function getFirstLineFormattedAddressWithoutNumber(): string|null
 	{
-		return $this->firstLineAddressWithoutNumber;
+		return $this->firstLineFormattedAddressWithoutNumber;
 	}
 
-	public function getSecondLineAddress(): string|null
+	public function getSecondLineFormattedAddress(): string|null
 	{
-		return $this->secondLineAddress;
+		return $this->secondLineFormattedAddress;
 	}
 
 	public function getWholeName(): string|null

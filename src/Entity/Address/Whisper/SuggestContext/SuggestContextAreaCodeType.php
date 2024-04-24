@@ -5,7 +5,7 @@ namespace Awaitcz\SmartForm\Entity\Address\Whisper\SuggestContext;
 enum SuggestContextAreaCodeType: string
 {
 
-	case MunicipalityCode = 'MUNICIPALITY_CODE';
+	case CityCode = 'CITY_CODE';
 
 	case DistrictCode = 'DISTRICT_CODE';
 

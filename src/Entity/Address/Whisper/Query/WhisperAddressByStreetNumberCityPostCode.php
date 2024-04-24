@@ -4,30 +4,30 @@ namespace Awaitcz\SmartForm\Entity\Address\Whisper\Query;
 
 use Awaitcz\SmartForm\Exception\InvalidArgumentException;
 
-final class WhisperAddressByStreetNumberMunicipalityPostCode implements WhisperAddressQuery
+final class WhisperAddressByStreetNumberCityPostCode implements WhisperAddressQuery
 {
 
 	public const FieldStreet = 'STREET';
 
 	public const FieldNumber = 'NUMBER';
 
-	public const FieldMunicipality = 'MUNICIPALITY';
-
 	public const FieldCity = 'CITY';
+
+	public const FieldCityExtended = 'CITY_EXTENDED';
 
 	public const FieldPostCode = 'ZIP';
 
 	public function __construct(
 		private readonly string|null $street = null,
 		private readonly string|null $number = null,
-		private readonly string|null $municipality = null,
 		private readonly string|null $city = null,
+		private readonly string|null $cityExtended = null,
 		private readonly string|null $postCode = null,
 		private readonly string $fieldType = self::FieldStreet,
 	)
 	{
-		if ($this->city === null && $this->municipality === null) {
-			throw new InvalidArgumentException('Either city or municipality must be set.');
+		if ($this->cityExtended === null && $this->city === null) {
+			throw new InvalidArgumentException('Either cityExtended or city must be set.');
 		}
 	}
 
@@ -41,14 +41,14 @@ final class WhisperAddressByStreetNumberMunicipalityPostCode implements WhisperA
 		return $this->number;
 	}
 
-	public function getMunicipality(): string|null
-	{
-		return $this->municipality;
-	}
-
 	public function getCity(): string|null
 	{
 		return $this->city;
+	}
+
+	public function getCityExtended(): string|null
+	{
+		return $this->cityExtended;
 	}
 
 	public function getPostCode(): string|null
@@ -69,12 +69,12 @@ final class WhisperAddressByStreetNumberMunicipalityPostCode implements WhisperA
 			'ZIP' => $this->postCode,
 		];
 
-		if ($this->city !== null) {
-			$arr['CITY'] = $this->city;
+		if ($this->cityExtended !== null) {
+			$arr['CITY_EXTENDED'] = $this->cityExtended;
 		}
 
-		if ($this->municipality !== null) {
-			$arr['MUNICIPALITY'] = $this->municipality;
+		if ($this->city !== null) {
+			$arr['CITY'] = $this->city;
 		}
 
 		return $arr;

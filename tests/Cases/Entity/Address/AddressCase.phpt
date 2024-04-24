@@ -22,13 +22,13 @@ final class AddressCase extends TestCase
 				'CODE' => '25536869',
 				'STREET_NAME' => 'nábřeží Edvarda Beneše',
 				'STREET_CODE' => '507393',
-				'MUNICIPALITY_NAME' => 'Praha',
-				'MUNICIPALITY_CODE' => '554782',
+				'CITY_NAME' => 'Praha',
+				'CITY_CODE' => '554782',
 				'POST_NAME' => 'Praha 011',
 				'ZIP' => '11800',
-				'MUNICIPALITY_AND_OPTIONAL_DISTRICT' => 'Praha',
-				'MUNICIPALITY_PART_NAME' => 'Malá Strana',
-				'MUNICIPALITY_PART_CODE' => '490121',
+				'CITY_AND_OPTIONAL_DISTRICT' => 'Praha',
+				'PART_NAME' => 'Malá Strana',
+				'PART_CODE' => '490121',
 				'CITY_AREA_1_NAME' => 'Praha 1',
 				'CITY_AREA_1_CODE' => '500054',
 				'CITY_AREA_2_NAME' => 'Praha 1',
@@ -43,15 +43,15 @@ final class AddressCase extends TestCase
 				'REGION_CODE' => '19',
 				'COUNTRY_NAME' => 'Česká republika',
 				'COUNTRY_CODE' => 'CZ',
-				'NUMBER_POPISNE' => '128',
-				'NUMBER_ORIENT' => '6',
-				'CHAR_ORIENT' => 'X',
-				'NUMBER_EVIDENCNI' => '123',
-				'NUMBER_WHOLE' => '128/6',
-				'FIRST_LINE' => 'nábřeží Edvarda Beneše 128/6',
-				'FIRST_LINE_NO_NUMBER' => 'nábřeží Edvarda Beneše',
-				'SECOND_LINE' => 'Praha 1 - Malá Strana',
-				'WHOLE_NAME' => 'nábřeží Edvarda Beneše 128/6, 118 00 Praha 1 - Malá Strana',
+				'CONSCRIPTION_NUMBER' => '128',
+				'STREET_NUMBER' => '6',
+				'STREET_NUMBER_CHAR' => 'X',
+				'PROVISIONAL_NUMBER' => '123',
+				'WHOLE_NUMBER' => '128/6',
+				'FORMATTED_ADDRESS_FIRST_LINE' => 'nábřeží Edvarda Beneše 128/6',
+				'FORMATTED_ADDRESS_FIRST_LINE_NO_NUMBER' => 'nábřeží Edvarda Beneše',
+				'FORMATTED_ADDRESS_SECOND_LINE' => 'Praha 1 - Malá Strana',
+				'FORMATTED_ADDRESS_WHOLE' => 'nábřeží Edvarda Beneše 128/6, 118 00 Praha 1 - Malá Strana',
 			],
 			'coordinates' => [
 				'type' => 'EXACT',
@@ -61,14 +61,14 @@ final class AddressCase extends TestCase
 				'gpsLng' => 14.4120572,
 			],
 			'realEstateDetails' => [
-				'BUILDING_PARCEL_NUMBER_1' => '680',
-				'BUILDING_PARCEL_NUMBER_2' => '4',
-				'CADASTRAL_UNIT_NAME' => 'Malá Strana',
-				'CADASTRAL_UNIT_CODE' => '727091',
-				'BUILDING_WITH_LIFT' => 'true',
-				'NUMBER_OF_STOREYS' => '1',
-				'NUMBER_OF_FLATS' => '0',
-				'FLOOR_AREA' => '7486',
+				'parcelNumber1' => '680',
+				'parcelNumber2' => '4',
+				'cadastralUnitName' => 'Malá Strana',
+				'cadastralUnitCode' => '727091',
+				'liftPresence' => 'true',
+				'numberOfStoreys' => '1',
+				'numberOfFlats' => '0',
+				'floorArea' => '7486',
 			],
 		]);
 
@@ -77,13 +77,13 @@ final class AddressCase extends TestCase
 		Assert::same('25536869', $address->getCode());
 		Assert::same('nábřeží Edvarda Beneše', $address->getStreetName());
 		Assert::same('507393', $address->getStreetCode());
-		Assert::same('Praha', $address->getMunicipalityName());
-		Assert::same('554782', $address->getMunicipalityCode());
+		Assert::same('Praha', $address->getCityName());
+		Assert::same('554782', $address->getCityCode());
 		Assert::same('Praha 011', $address->getPostName());
 		Assert::same('11800', $address->getPostCode());
-		Assert::same('Praha', $address->getMunicipalityAndOptionalDistrict());
-		Assert::same('Malá Strana', $address->getMunicipalityPartName());
-		Assert::same('490121', $address->getMunicipalityPartCode());
+		Assert::same('Praha', $address->getCityAndOptionalDistrict());
+		Assert::same('Malá Strana', $address->getPartName());
+		Assert::same('490121', $address->getPartCode());
 		Assert::same('Praha 1', $address->getCityAreaFirstName());
 		Assert::same('500054', $address->getCityAreaFirstCode());
 		Assert::same('Praha 1', $address->getCityAreaSecondName());
@@ -98,14 +98,14 @@ final class AddressCase extends TestCase
 		Assert::same('19', $address->getRegionCode());
 		Assert::same('Česká republika', $address->getCountryName());
 		Assert::same('CZ', $address->getCountryCode());
-		Assert::same('128', $address->getLandRegistryHouseNumber());
-		Assert::same('6', $address->getParticularStreetHouseNumber());
-		Assert::same('X', $address->getParticularStreetHouseNumberCharacter());
-		Assert::same('123', $address->getEvidenceHouseNumber());
-		Assert::same('128/6', $address->getNumberWhole());
-		Assert::same('nábřeží Edvarda Beneše 128/6', $address->getFirstLineAddress());
-		Assert::same('nábřeží Edvarda Beneše', $address->getFirstLineAddressWithoutNumber());
-		Assert::same('Praha 1 - Malá Strana', $address->getSecondLineAddress());
+		Assert::same('128', $address->getConscriptionNumber());
+		Assert::same('6', $address->getStreetNumber());
+		Assert::same('X', $address->getStreetNumberCharacter());
+		Assert::same('123', $address->getProvisionalNumber());
+		Assert::same('128/6', $address->getWholeNumber());
+		Assert::same('nábřeží Edvarda Beneše 128/6', $address->getFirstLineFormattedAddress());
+		Assert::same('nábřeží Edvarda Beneše', $address->getFirstLineFormattedAddressWithoutNumber());
+		Assert::same('Praha 1 - Malá Strana', $address->getSecondLineFormattedAddress());
 		Assert::same('nábřeží Edvarda Beneše 128/6, 118 00 Praha 1 - Malá Strana', $address->getWholeName());
 
 		$coordinates = $address->getCoordinates();

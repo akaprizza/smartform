@@ -45,15 +45,16 @@ final class AddressClientCase extends TestCase
 
 		$validatedAddress = $client->validate(
 			new ValidateAddress(
+				id: 16,
 				countries: [Country::CzechRepublic],
-				wholeAddress: 'nábřeží Edvarda Beneše 128/6',
+				wholeAddress: 'Rychlonožkova 1836, Kuřim',
 			),
 		);
 
 		Assert::type(ValidatedAddressResponse::class, $validatedAddress);
 		Assert::same(ResultCode::Ok, $validatedAddress->getResultCode());
 		Assert::same(null, $validatedAddress->getErrorMessage());
-		Assert::same(null, $validatedAddress->getId());
+		Assert::same(16, $validatedAddress->getId());
 		Assert::count(1, $validatedAddress->getResult());
 		Assert::same(ResultType::Hit, $validatedAddress->getResultType());
 		Assert::same(null, $validatedAddress->getHint());

@@ -4,27 +4,27 @@ namespace Awaitcz\SmartForm\Entity\Address\Whisper\Query;
 
 use Awaitcz\SmartForm\Exception\InvalidArgumentException;
 
-final class WhisperAddressByStreetAndNumberMunicipalityPostCode implements WhisperAddressQuery
+final class WhisperAddressByStreetAndNumberCityPostCode implements WhisperAddressQuery
 {
 
 	public const FieldStreetAndNumber = 'STREET_AND_NUMBER';
 
-	public const FieldMunicipality = 'MUNICIPALITY';
-
 	public const FieldCity = 'CITY';
+
+	public const FieldCityExtended = 'CITY_EXTENDED';
 
 	public const FieldPostCode = 'ZIP';
 
 	public function __construct(
 		private readonly string|null $streetAndNumber = null,
 		private readonly string|null $postCode = null,
-		private readonly string|null $municipality = null,
 		private readonly string|null $city = null,
+		private readonly string|null $cityExtended = null,
 		private readonly string $fieldType = self::FieldStreetAndNumber,
 	)
 	{
-		if ($this->city === null && $this->municipality === null) {
-			throw new InvalidArgumentException('Either city or municipality must be set.');
+		if ($this->cityExtended === null && $this->city === null) {
+			throw new InvalidArgumentException('Either cityExtended or city must be set.');
 		}
 	}
 
@@ -38,14 +38,14 @@ final class WhisperAddressByStreetAndNumberMunicipalityPostCode implements Whisp
 		return $this->postCode;
 	}
 
-	public function getMunicipality(): string|null
-	{
-		return $this->municipality;
-	}
-
 	public function getCity(): string|null
 	{
 		return $this->city;
+	}
+
+	public function getCityExtended(): string|null
+	{
+		return $this->cityExtended;
 	}
 
 	public function getFieldType(): string
@@ -60,12 +60,12 @@ final class WhisperAddressByStreetAndNumberMunicipalityPostCode implements Whisp
 			'ZIP' => $this->postCode,
 		];
 
-		if ($this->municipality !== null) {
-			$arr['MUNICIPALITY'] = $this->municipality;
-		}
-
 		if ($this->city !== null) {
 			$arr['CITY'] = $this->city;
+		}
+
+		if ($this->cityExtended !== null) {
+			$arr['CITY_EXTENDED'] = $this->cityExtended;
 		}
 
 		return $arr;

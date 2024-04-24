@@ -17,7 +17,7 @@ final class AddressClient extends AbstractClient
 		$body = Json::encode($addressRequest->toArray());
 
 		$response = $this->doRequest(
-			new Request('POST', self::BASE_URL . '/oracle/v9', [], $body),
+			new Request('POST', self::BASE_URL . '/oracleAddress/v11', [], $body),
 		);
 
 		$decodedResponse = $this->evaluateResponse($response);
@@ -30,7 +30,7 @@ final class AddressClient extends AbstractClient
 		$body = Json::encode($addressRequest->toArray());
 
 		$response = $this->doRequest(
-			new Request('POST', self::BASE_URL . '/validateAddress/v9', [], $body),
+			new Request('POST', self::BASE_URL . '/validateAddress/v10', [], $body),
 		);
 
 		$decodedResponse = $this->evaluateResponse($response);

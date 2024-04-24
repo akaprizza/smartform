@@ -3,6 +3,7 @@
 namespace Awaitcz\SmartForm\Entity\Address\Validate;
 
 use Awaitcz\SmartForm\Entity\Country;
+use function array_filter;
 use function array_map;
 
 final class ValidateAddress
@@ -16,21 +17,21 @@ final class ValidateAddress
 		private readonly array $countries = [],
 		private readonly string|null $firstAddressLine = null,
 		private readonly string|null $secondAddressLine = null,
-		private readonly string|null $municipalityAndDistrict = null,
+		private readonly string|null $cityAndDistrict = null,
 		private readonly string|null $postCode = null,
 		private readonly string|null $street = null,
 		private readonly string|null $streetCode = null,
-		private readonly string|null $municipalityPartCode = null,
-		private readonly string|null $municipalityCode = null,
+		private readonly string|null $partCode = null,
+		private readonly string|null $cityCode = null,
 		private readonly string|null $wholeAddress = null,
-		private readonly string|null $numberWhole = null,
+		private readonly string|null $wholeNumber = null,
 		private readonly string|null $numberFirst = null,
 		private readonly string|null $numberSecond = null,
 		private readonly string|null $numberThird = null,
-		private readonly string|null $landRegistryHouseNumber = null,
-		private readonly string|null $particularStreetHouseNumber = null,
-		private readonly string|null $particularStreetHouseNumberCharacter = null,
-		private readonly string|null $evidenceHouseNumber = null,
+		private readonly string|null $conscriptionNumber = null,
+		private readonly string|null $streetNumber = null,
+		private readonly string|null $streetNumberCharacter = null,
+		private readonly string|null $provisionalNumber = null,
 		private readonly string|null $code = null,
 	)
 	{
@@ -42,10 +43,9 @@ final class ValidateAddress
 	public function toArray(): array
 	{
 		$arr = [
-			'id' => $this->id ?? 0,
+			'id' => $this->id,
 			'countries' => array_map(static fn (Country $country) => $country->value, $this->countries),
 			'values' => [],
-
 		];
 
 		if ($this->firstAddressLine !== null) {
@@ -56,8 +56,8 @@ final class ValidateAddress
 			$arr['values']['SECOND_LINE'] = $this->secondAddressLine;
 		}
 
-		if ($this->municipalityAndDistrict !== null) {
-			$arr['values']['MUNICIPALITY_AND_DISTRICT'] = $this->municipalityAndDistrict;
+		if ($this->cityAndDistrict !== null) {
+			$arr['values']['CITY_AND_DISTRICT'] = $this->cityAndDistrict;
 		}
 
 		if ($this->postCode !== null) {
@@ -72,20 +72,20 @@ final class ValidateAddress
 			$arr['values']['STREET_CODE'] = $this->streetCode;
 		}
 
-		if ($this->municipalityPartCode !== null) {
-			$arr['values']['MUNICIPALITY_PART_CODE'] = $this->municipalityPartCode;
+		if ($this->partCode !== null) {
+			$arr['values']['PART_CODE'] = $this->partCode;
 		}
 
-		if ($this->municipalityCode !== null) {
-			$arr['values']['MUNICIPALITY_CODE'] = $this->municipalityCode;
+		if ($this->cityCode !== null) {
+			$arr['values']['CITY_CODE'] = $this->cityCode;
 		}
 
 		if ($this->wholeAddress !== null) {
 			$arr['values']['WHOLE_ADDRESS'] = $this->wholeAddress;
 		}
 
-		if ($this->numberWhole !== null) {
-			$arr['values']['NUMBER_WHOLE'] = $this->numberWhole;
+		if ($this->wholeNumber !== null) {
+			$arr['values']['WHOLE_NUMBER'] = $this->wholeNumber;
 		}
 
 		if ($this->numberFirst !== null) {
@@ -100,27 +100,27 @@ final class ValidateAddress
 			$arr['values']['NUMBER_3'] = $this->numberThird;
 		}
 
-		if ($this->landRegistryHouseNumber !== null) {
-			$arr['values']['NUMBER_POPIS'] = $this->landRegistryHouseNumber;
+		if ($this->conscriptionNumber !== null) {
+			$arr['values']['CONSCRIPTION_NUMBER'] = $this->conscriptionNumber;
 		}
 
-		if ($this->particularStreetHouseNumber !== null) {
-			$arr['values']['NUMBER_ORIENT'] = $this->particularStreetHouseNumber;
+		if ($this->streetNumber !== null) {
+			$arr['values']['STREET_NUMBER'] = $this->streetNumber;
 		}
 
-		if ($this->particularStreetHouseNumberCharacter !== null) {
-			$arr['values']['CHAR_ORIENT'] = $this->particularStreetHouseNumberCharacter;
+		if ($this->streetNumberCharacter !== null) {
+			$arr['values']['STREET_NUMBER_CHAR'] = $this->streetNumberCharacter;
 		}
 
-		if ($this->evidenceHouseNumber !== null) {
-			$arr['values']['NUMBER_EVIDENT'] = $this->evidenceHouseNumber;
+		if ($this->provisionalNumber !== null) {
+			$arr['values']['PROVISIONAL_NUMBER'] = $this->provisionalNumber;
 		}
 
 		if ($this->code !== null) {
 			$arr['values']['CODE'] = $this->code;
 		}
 
-		return $arr;
+		return array_filter($arr, static fn (mixed $value): bool => $value !== null);
 	}
 
 }
