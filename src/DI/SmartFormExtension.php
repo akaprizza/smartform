@@ -3,7 +3,6 @@
 namespace Awaitcz\SmartForm\DI;
 
 use Awaitcz\SmartForm\Client\AddressClient;
-use Awaitcz\SmartForm\Client\CompanyClient;
 use Awaitcz\SmartForm\Client\EmailClient;
 use Awaitcz\SmartForm\Config;
 use Awaitcz\SmartForm\Http\GuzzleClient;
@@ -44,11 +43,6 @@ final class SmartFormExtension extends CompilerExtension
 		$builder
 			->addDefinition($this->prefix('address'))
 			->setFactory(AddressClient::class, [$this->prefix('@config')]);
-
-		// Company client
-		$builder
-			->addDefinition($this->prefix('company'))
-			->setFactory(CompanyClient::class, [$this->prefix('@config')]);
 
 		// Email client
 		$builder
