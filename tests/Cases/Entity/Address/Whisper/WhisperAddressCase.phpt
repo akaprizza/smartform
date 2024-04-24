@@ -33,7 +33,7 @@ final class WhisperAddressCase extends TestCase
 		Assert::count(1, $output['values']);
 		Assert::same('SK', $output['country']);
 		Assert::same(15, $output['limit']);
-		Assert::same('PREFERENCE', $instance->getSuggestContext()?->getSuggestContextType()->value);
+		Assert::same('PREFERENCE', $output['suggestContext']['type']);
 	}
 
 }

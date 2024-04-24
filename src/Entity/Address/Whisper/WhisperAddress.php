@@ -55,7 +55,7 @@ final class WhisperAddress
 			'values' => $this->values->toArray(),
 			'country' => $this->country?->value ?? Country::CzechRepublic,
 			'limit' => $this->limit > 21 || $this->limit < 1 ? 21 : $this->limit,
-		];
+		] + ($this->suggestContext ? ['suggestContext' => $this->suggestContext->toArray()] : []);
 	}
 
 }
