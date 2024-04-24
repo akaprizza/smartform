@@ -1,31 +1,16 @@
 # SmartForm.cz Api Integration
 
-SmartForm.cz API integration for Nette Framework inspirated by Contributte/GoSms
+SmartForm.cz API integration inspirated by Contributte/GoSms
 
 ## Content
 
 - [Requirements](#requirements)
-- [Installation - register an extension](#installation)
 - [Usage](#usage)
 
 
 ## Requirements
 
 Create account on [smartform.cz](https://admin.smartform.cz/user/create) and copy clientId and password from [https://admin.smartform.cz/wsUser/wsListYear](administration).
-
-
-## Installation
-
-```neon
-extensions:
-	smartForm: Awaitcz\SmartForm\DI\SmartFormExtension
-
-
-smartForm:
-	clientId: R3sZyjLPLP
-	token: qLa1vcNn
-	testMode: false # Optional, default false
-```
 
 
 ## Usage
