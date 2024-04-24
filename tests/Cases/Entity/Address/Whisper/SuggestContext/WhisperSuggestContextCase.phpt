@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Cases\Entity\Address\Whisper\Query;
+namespace Tests\Cases\Entity\Address\Whisper\SuggestContext;
 
 require __DIR__ . '/../../../../../bootstrap.php';
 
