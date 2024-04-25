@@ -4,6 +4,7 @@ namespace Awaitcz\SmartForm\Entity\Address\Validate;
 
 use Awaitcz\SmartForm\Entity\AbstractResultResponse;
 use Awaitcz\SmartForm\Entity\Address\Address;
+use Awaitcz\SmartForm\Entity\Address\Validate\Result\ValidateAddressResultHint;
 use Awaitcz\SmartForm\Entity\ResultCode;
 use Awaitcz\SmartForm\Entity\ResultType;
 use function array_map;
@@ -20,7 +21,7 @@ final class ValidatedAddressResponse extends AbstractResultResponse
 		private readonly int|null $id,
 		private readonly array $result = [],
 		private readonly ResultType|null $resultType = null,
-		private readonly string|null $hint = null,
+		private readonly ValidateAddressResultHint|null $hint = null,
 	)
 	{
 		parent::__construct($resultCode, $errorMessage);
@@ -42,7 +43,7 @@ final class ValidatedAddressResponse extends AbstractResultResponse
 				$data['result']['addresses'],
 			),
 			ResultType::from($data['result']['type']),
-			$data['result']['hint'],
+			isset($data['result']['hint']) ? ValidateAddressResultHint::fromArray($data['result']['hint']) : null,
 		) : new self(
 			$resultCode,
 			$data['errorMessage'],
@@ -69,7 +70,7 @@ final class ValidatedAddressResponse extends AbstractResultResponse
 		return $this->result;
 	}
 
-	public function getHint(): string|null
+	public function getHint(): ValidateAddressResultHint|null
 	{
 		return $this->hint;
 	}
