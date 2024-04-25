@@ -6,12 +6,12 @@ use Awaitcz\SmartForm\Config;
 use Awaitcz\SmartForm\Entity\ResultCode;
 use Awaitcz\SmartForm\Exception\ClientException;
 use Awaitcz\SmartForm\Http\IHttpClient;
+use Nette\Utils\Json;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use function assert;
 use function base64_encode;
 use function is_array;
-use function json_decode;
 
 abstract class AbstractClient
 {
@@ -41,7 +41,7 @@ abstract class AbstractClient
 	protected function assertResponse(ResponseInterface $response, int $code = 200): void
 	{
 		if ($response->getStatusCode() !== $code) {
-			$decodedResponse = json_decode($response->getBody()->getContents(), false);
+			$decodedResponse = Json::decode((string) $response->getBody());
 
 			throw new ClientException($decodedResponse->errorMessage, $response->getStatusCode());
 		}
@@ -54,7 +54,7 @@ abstract class AbstractClient
 	{
 		$this->assertResponse($response, $code);
 
-		$data = json_decode($response->getBody()->getContents(), true);
+		$data = Json::decode((string) $response->getBody(), true);
 		assert(is_array($data));
 
 		return $data;
