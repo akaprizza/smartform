@@ -6,14 +6,14 @@ final class AddressRealEstateDetail
 {
 
 	public function __construct(
-		private readonly string|null $buildingParcelNumberFirst,
-		private readonly string|null $buildingParcelNumberSecond,
+		private readonly string|int|null $buildingParcelNumberFirst,
+		private readonly string|int|null $buildingParcelNumberSecond,
 		private readonly string|null $cadastralUnitName,
-		private readonly string|null $cadastralUnitCode,
+		private readonly string|int|null $cadastralUnitCode,
 		private readonly bool|null $buildingWithLift,
-		private readonly string|null $numberOfStoreys,
-		private readonly string|null $numberOfFlats,
-		private readonly string|null $floorArea,
+		private readonly string|int|null $numberOfStoreys,
+		private readonly string|int|null $numberOfFlats,
+		private readonly string|int|null $floorArea,
 	)
 	{
 	}
@@ -35,12 +35,12 @@ final class AddressRealEstateDetail
 		);
 	}
 
-	public function getBuildingParcelNumberFirst(): string|null
+	public function getBuildingParcelNumberFirst(): string|int|null
 	{
 		return $this->buildingParcelNumberFirst;
 	}
 
-	public function getBuildingParcelNumberSecond(): string|null
+	public function getBuildingParcelNumberSecond(): string|int|null
 	{
 		return $this->buildingParcelNumberSecond;
 	}
@@ -50,7 +50,7 @@ final class AddressRealEstateDetail
 		return $this->cadastralUnitName;
 	}
 
-	public function getCadastralUnitCode(): string|null
+	public function getCadastralUnitCode(): string|int|null
 	{
 		return $this->cadastralUnitCode;
 	}
@@ -60,17 +60,17 @@ final class AddressRealEstateDetail
 		return $this->buildingWithLift;
 	}
 
-	public function getNumberOfStoreys(): string|null
+	public function getNumberOfStoreys(): string|int|null
 	{
 		return $this->numberOfStoreys;
 	}
 
-	public function getNumberOfFlats(): string|null
+	public function getNumberOfFlats(): string|int|null
 	{
 		return $this->numberOfFlats;
 	}
 
-	public function getFloorArea(): string|null
+	public function getFloorArea(): string|int|null
 	{
 		return $this->floorArea;
 	}
